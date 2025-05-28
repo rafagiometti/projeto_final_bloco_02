@@ -19,42 +19,42 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "tb_categorias")
 public class Categoria {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotBlank(message = "Tipo é obrigatório!")
-	@Size(min = 5)
-	@Pattern(regexp = "^(?!\\d+$).+", message = "O tipo não pode ser apenas numérico")
-	private String tipo;
-	
-	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("categoria")
-	private List<Produto> produtos;  */
 
-	// getters e setters
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @NotBlank(message = "Tipo é obrigatório!")
+    @Size(min = 5, message = "O tipo deve ter no mínimo 5 caracteres")
+    @Pattern(regexp = "^(?!\\d+$).+", message = "O tipo não pode ser apenas numérico")
+    private String tipo;
 
-	public String getTipo() {
-		return tipo;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("categoria")
+    private List<Produto> produtos;
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-/*
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
+    // Getters e Setters
+    public Long getId() {
+        return id;
+    }
 
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-		}*/
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
 }
